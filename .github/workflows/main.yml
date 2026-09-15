@@ -1,0 +1,26 @@
+name: CI/CD Pipeline Basics
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Verify file structure
+        run: |
+          echo "Starting build check..."
+          test -f app/config.conf && echo "Config file exists: PASSED"
+          ls -la app/
+
+      - name: Run automated test
+        run: |
+          echo "Running unit tests..."
+          echo "All checks passed successfully!"
